@@ -1,0 +1,17 @@
+{
+  "name": "@kavkom/verto-client-demo",
+  "version": "1.0.0",
+  "description": "Kavkom Verto JsonRPC Client Demo",
+  "main": "main.js",
+  "scripts": {
+    "start": "serve -S",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eugene Syrotiuk",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "jquery-json": "^2.6.0",
+    "verto": "^0.1.1"
+  }
+}

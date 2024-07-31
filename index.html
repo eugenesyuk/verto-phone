@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Verto Client Demo</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+  </head>
+
+  <body>
+    <h2>Verto Client Demo</h2>
+
+    <div>
+      <ol>
+        <li>Provide credentials, connect to server</li>
+        <li>Place call to destination/wait for incoming call</li>
+        <li>Hangup call</li>
+        <li>Disconnect</li>
+      </ol>
+    </div>
+
+    <h4>
+      Connection State: <code><span id="state">Initial</span></code>
+    </h4>
+
+    <ol>
+      <li>
+        <p>Provide your creadentials:</p>
+        <table class="mt-8 mb-8">
+          <tr>
+            <td class="pb-0"><label for="serverInput">Server</label></td>
+            <td class="pb-0"><label for="portInput">Port</label></td>
+          </tr>
+          <tr>
+            <td>
+              <span>wss://</span>
+              <input
+                type="text"
+                id="serverInput"
+                placeholder="domain"
+              />
+            </td>
+          
+            <td>
+              <input
+                type="text"
+                id="portInput"
+                placeholder="80"
+                value="8082"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td class="pb-0"><label for="loginInput">Login</label></td>
+            <td class="pb-0"><label for="passwordInput">Password</label></td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="text"
+                id="loginInput"
+                placeholder="Login"
+              />
+            </td>
+
+            <td>
+              <input type="text" id="passwordInput" placeholder="Password" />
+            </td>
+          </tr>
+        </table>
+
+        <button id="connectButton">Connect</button>
+      </li>
+
+      <li>
+        <button id="callButton" disabled>Make Call</button> to
+        <input
+          class="m-8"
+          id="targetInput"
+          type="text"
+          placeholder="Destination number"
+          disabled
+        />
+        <strong id="callState" style="display: none">Call State: <code><span id="callStateText">Initial</span></code></strong>
+
+        <div id="callControls" style="display: none">
+          <p>
+            When the call is established, the remote audio is added to the
+            following HTML5 audio element...
+          </p>
+
+          <audio id="remoteAudio" controls autoplay>
+            <p>Your browser doesn't support HTML5 audio.</p>
+          </audio>
+
+          <p>
+            <input class="m-8" type="checkbox" id="holdCheckbox" name="hold" />
+            <label for="hold">Hold</label>
+
+            <input class="m-8" type="checkbox" id="muteCheckbox" name="mute" />
+            <label for="mute">Mute</label>
+
+            <button id="transferButton">Transfer call</button> to
+            <input class="m-8" id="transferTarget" type="text" />
+          </p>
+
+          <p>
+            While the call is established, DTMF may be sent using the following
+            "keypad"...
+          </p>
+          <div class="dtmf">DTMF sent: <span id="dtmf"></span></div>
+
+          <div>
+            <div>
+              <button class="dtmfButton">1</button>
+              <button class="dtmfButton">2</button>
+              <button class="dtmfButton">3</button>
+            </div>
+
+            <div>
+              <button class="dtmfButton">4</button>
+              <button class="dtmfButton">5</button>
+              <button class="dtmfButton">6</button>
+            </div>
+
+            <div>
+              <button class="dtmfButton">7</button>
+              <button class="dtmfButton">8</button>
+              <button class="dtmfButton">9</button>
+            </div>
+
+            <div>
+              <button class="dtmfButton">*</button>
+              <button class="dtmfButton">0</button>
+              <button class="dtmfButton">#</button>
+            </div>
+          </div>
+        
+        <button id="hangupButton">Hangup Call</button>
+        </div>
+      </li>
+
+      <li><button id="disconnectButton" disabled>Disconnect</button></li>
+    </ol>
+
+    <dialog id="incomingCallDialog" class="center">
+      <button id="closeDialogButton">&#x2715;</button>
+      <h3>Incoming call from:</h3>
+      <p id="incomingCallNumber"></p>
+      <button id="answerCallButton">Answer</button>
+      <button id="declineCallButton">Decline</button>
+    </dialog>
+
+    <!-- Verto dependencies -->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/jquery-json/dist/jquery.json.min.js"></script>
+
+    <!-- Verto library -->
+    <script src="../node_modules/verto/src/jquery.verto.js"></script>
+    <script src="../node_modules/verto/src/jquery.FSRTC.js"></script>
+    <script src="../node_modules/verto/src/jquery.jsonrpcclient.js"></script>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
